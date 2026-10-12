@@ -3,8 +3,11 @@ import os
 import requests
 import structlog
 
+<<<<<<< HEAD
 log = structlog.get_logger(__name__)
 
+=======
+>>>>>>> d2053756a5b99babaf494f0054e61fa601cd786f
 from django.db import transaction
 from django.http import HttpResponseServerError
 from django.utils.decorators import method_decorator
@@ -94,7 +97,10 @@ class StudentAssessmentView(ViewSet):
                 with transaction.atomic():
                     student_assessment.save()
                     serializer = StudentAssessmentSerializer(student_assessment)
+<<<<<<< HEAD
                     log.info("studentsasses create try with 97")
+=======
+>>>>>>> d2053756a5b99babaf494f0054e61fa601cd786f
                     return Response(serializer.data, status=status.HTTP_201_CREATED)
             except Exception as ex:
                 log.error("studentsasses exepcetion 100", exc_info=True)
