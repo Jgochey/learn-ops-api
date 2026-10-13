@@ -4,7 +4,6 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.models import User
 from LearningAPI.models import NssUser
 from rest_framework.test import APIClient
-from pytest import fail
 
 class StudentPartialUpdateTests(APITestCase):
     """Tests for PATCH /students/{pk}/"""
@@ -21,12 +20,14 @@ class StudentPartialUpdateTests(APITestCase):
         token = Token.objects.create(user=user)
         client = APIClient()
         client.credentials(HTTP_AUTHORIZATION='Token ' + token.key)
+
         """PUT slack_handle should save the new value to the database."""
         response = client.put(
             f"/students/{nss_user.id}",
             {"slack_handle": "@newhandle"},
             format="json"
         )
-        #  put your test code here
-        # delete this line when you are done
-        fail("Not Yet Implemented")
+
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        nss_user.refresh_from_db()
+        self.assertEqual(nss_user.slack_handle, "@newhandle")
