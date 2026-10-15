@@ -3,11 +3,6 @@ import os
 import requests
 import structlog
 
-<<<<<<< HEAD
-log = structlog.get_logger(__name__)
-
-=======
->>>>>>> d2053756a5b99babaf494f0054e61fa601cd786f
 from django.db import transaction
 from django.http import HttpResponseServerError
 from django.utils.decorators import method_decorator
@@ -22,6 +17,7 @@ from LearningAPI.models.people import (Assessment, NssUser, StudentAssessment, S
 from LearningAPI.models.coursework import Book
 from LearningAPI.models.skill import AssessmentWeight, LearningWeight
 
+log = structlog.get_logger(__name__)
 
 class StudentAssessmentPermission(permissions.BasePermission):
     """Custom permissions for Assessment view"""
@@ -97,10 +93,7 @@ class StudentAssessmentView(ViewSet):
                 with transaction.atomic():
                     student_assessment.save()
                     serializer = StudentAssessmentSerializer(student_assessment)
-<<<<<<< HEAD
                     log.info("studentsasses create try with 97")
-=======
->>>>>>> d2053756a5b99babaf494f0054e61fa601cd786f
                     return Response(serializer.data, status=status.HTTP_201_CREATED)
             except Exception as ex:
                 log.error("studentsasses exepcetion 100", exc_info=True)
