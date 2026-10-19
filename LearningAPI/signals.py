@@ -1,3 +1,5 @@
+"""Authentication for instructor accounts on login"""
+
 import os
 
 from allauth.account.signals import user_logged_in
